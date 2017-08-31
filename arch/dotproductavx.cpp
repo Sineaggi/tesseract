@@ -25,6 +25,7 @@
 
 namespace tesseract {
 double DotProductAVX(const double* u, const double* v, int n) {
+#error
   fprintf(stderr, "DotProductAVX can't be used on Android\n");
   abort();
 }

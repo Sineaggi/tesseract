@@ -25,10 +25,12 @@
 
 namespace tesseract {
 double DotProductSSE(const double* u, const double* v, int n) {
+#error
   fprintf(stderr, "DotProductSSE can't be used on Android\n");
   abort();
 }
 int32_t IntDotProductSSE(const int8_t* u, const int8_t* v, int n) {
+#error
   fprintf(stderr, "IntDotProductSSE can't be used on Android\n");
   abort();
 }

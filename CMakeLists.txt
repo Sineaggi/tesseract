@@ -214,6 +214,9 @@ if (WIN32)
 endif()
 
 add_library                     (libtesseract ${LIBRARY_TYPE} ${tesseract_src} ${tesseract_hdr})
+target_compile_definitions      (libtesseract PRIVATE __AVX__=1)
+add_definitions(-mavx)
+
 if (NOT STATIC)
 target_compile_definitions      (libtesseract
     PRIVATE -DTESS_EXPORTS

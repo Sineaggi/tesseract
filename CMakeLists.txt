@@ -211,11 +211,16 @@ if (WIN32)
             ${CMAKE_CURRENT_SOURCE_DIR}/arch/dotproductavx.cpp
             PROPERTIES COMPILE_FLAGS "/arch:AVX")
     endif()
+else()
+    set_source_files_properties(
+            ${CMAKE_CURRENT_SOURCE_DIR}/arch/dotproductsse.cpp
+            PROPERTIES COMPILE_DEFINITIONS __SSE4_1__)
 endif()
 
 add_library                     (libtesseract ${LIBRARY_TYPE} ${tesseract_src} ${tesseract_hdr})
 target_compile_definitions      (libtesseract PRIVATE __AVX__=1)
 add_definitions(-mavx)
+add_definitions(-msse4.1)
 
 if (NOT STATIC)
 target_compile_definitions      (libtesseract

@@ -130,7 +130,7 @@ include(SourceGroups)
 
 add_definitions(-DHAVE_CONFIG_H)
 add_definitions(-D_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS=1)
-add_definitions(-DUSE_STD_NAMESPACE=1)
+add_definitions(-DUSE_STD_NAMESPACE)
 add_definitions(-DWINDLLNAME="libtesseract${VERSION_MAJOR}${VERSION_MINOR}.dll")
 
 include_directories(${Leptonica_INCLUDE_DIRS})
@@ -214,14 +214,13 @@ if (WIN32)
 else()
     set_source_files_properties(
             ${CMAKE_CURRENT_SOURCE_DIR}/arch/dotproductsse.cpp
-            PROPERTIES COMPILE_DEFINITIONS __SSE4_1__)
+            PROPERTIES COMPILE_FLAGS "-msse4.1")
+    set_source_files_properties(
+            ${CMAKE_CURRENT_SOURCE_DIR}/arch/dotproductavx.cpp
+            PROPERTIES COMPILE_FLAGS "-mavx")
 endif()
 
 add_library                     (libtesseract ${LIBRARY_TYPE} ${tesseract_src} ${tesseract_hdr})
-target_compile_definitions      (libtesseract PRIVATE __AVX__=1)
-add_definitions(-mavx)
-add_definitions(-msse4.1)
-
 if (NOT STATIC)
 target_compile_definitions      (libtesseract
     PRIVATE -DTESS_EXPORTS
